@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Napieo Digital Hub — Learn, Create & Earn Online</title>
+<meta name="description" content="Napieo Digital Hub teaches entrepreneurs, writers, and creators how to build profitable online businesses through Amazon KDP publishing, digital marketing, affiliate marketing, blogging, and eBook creation.">
+<meta name="keywords" content="Amazon KDP, digital marketing, affiliate marketing, blogging, eBook publishing, online business, content creation">
+<meta property="og:title" content="Napieo Digital Hub — Transform Your Digital Skills Into Online Income">
+<meta property="og:description" content="Learn digital marketing, Amazon KDP publishing, affiliate marketing, blogging, content creation, and online business strategies.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0A1628">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2218%22 fill=%22%230A1628%22/><text x=%2250%22 y=%2268%22 font-size=%2258%22 fill=%22%23C9A646%22 font-family=%22Georgia%22 text-anchor=%22middle%22>N</text></svg>">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+  :root{
+    --navy:#0A1628;
+    --navy-panel:#0F2847;
+    --gold:#C9A646;
+    --gold-bright:#E0C36F;
+    --paper:#FAF8F3;
+    --ink:#1A1A1A;
+  }
+  *{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+  }
+  .font-display{font-family:'Fraunces',serif;}
+
+  ::selection{background:var(--gold); color:var(--navy);}
+
+  /* Scrollbar */
+  ::-webkit-scrollbar{width:10px;}
+  ::-webkit-scrollbar-track{background:var(--paper);}
+  ::-webkit-scrollbar-thumb{background:var(--navy); border-radius:10px;}
+
+  /* Reduced motion respect */
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
+  }
+
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  .gold-rule{
+    background:linear-gradient(90deg, var(--gold) 0%, transparent 100%);
+    height:1px;
+  }
+
+  .chapter-label{
+    font-family:'Fraunces',serif;
+    font-variant-numeric: tabular-nums;
+    letter-spacing:.18em;
+  }
+
+  /* Book spine cards */
+  .spine{
+    transition: transform .45s cubic-bezier(.22,1,.36,1), box-shadow .45s ease;
+    transform-origin:bottom left;
+  }
+  .spine:hover{
+    transform: translateY(-10px) rotate(0deg) !important;
+    box-shadow: 0 30px 60px -15px rgba(10,22,40,.45);
+  }
+
+  .shelf-base{
+    background: linear-gradient(180deg, #0F2847 0%, #0A1628 100%);
+    border-bottom: 6px solid var(--gold);
+  }
+
+  .nav-link{position:relative;}
+  .nav-link::after{
+    content:'';
+    position:absolute; left:0; bottom:-4px;
+    width:0; height:1px;
+    background:var(--gold);
+    transition:width .3s ease;
+  }
+  .nav-link:hover::after{width:100%;}
+
+  .btn-gold{
+    background:var(--gold);
+    color:var(--navy);
+    transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+  }
+  .btn-gold:hover{
+    background:var(--gold-bright);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px -8px rgba(201,166,70,.5);
+  }
+  .btn-outline{
+    border:1px solid rgba(250,248,243,.35);
+    color:var(--paper);
+    transition: border-color .25s ease, background .25s ease;
+  }
+  .btn-outline:hover{
+    border-color:var(--gold);
+    background:rgba(201,166,70,.08);
+  }
+
+  .card-lift{transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;}
+  .card-lift:hover{transform:translateY(-6px); box-shadow:0 24px 48px -20px rgba(10,22,40,.25); border-color:var(--gold);}
+
+  .marquee-track{
+    display:flex;
+    width:max-content;
+    animation: marquee 28s linear infinite;
+  }
+  @media (prefers-reduced-motion: reduce){ .marquee-track{animation:none;} }
+  @keyframes marquee{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+
+  .testi-slide{display:none;}
+  .testi-slide.active{display:block; animation: fadeIn .6s ease;}
+  @keyframes fadeIn{ from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);} }
+
+  .loader{
+    position:fixed; inset:0; z-index:9999;
+    background:var(--navy);
+    display:flex; align-items:center; justify-content:center;
+    transition: opacity .6s ease, visibility .6s ease;
+  }
+  .loader.hide{opacity:0; visibility:hidden;}
+  .loader-mark{
+    font-family:'Fraunces',serif;
+    font-size:2.5rem;
+    color:var(--gold);
+    letter-spacing:.05em;
+    position:relative;
+  }
+  .loader-bar{
+    width:180px; height:2px; background:rgba(201,166,70,.2);
+    margin-top:18px; overflow:hidden; position:relative;
+  }
+  .loader-bar::after{
+    content:''; position:absolute; left:-40%; top:0; bottom:0; width:40%;
+    background:var(--gold);
+    animation: loadbar 1.1s ease-in-out infinite;
+  }
+  @keyframes loadbar{ 0%{left:-40%;} 100%{left:100%;} }
+
+  .dark body{}
+  .darkmode{background:#070D17 !important; color:var(--paper);}
+  .darkmode .light-surface{background:#0F1B2E !important; color:var(--paper) !important; border-color:rgba(201,166,70,.18) !important;}
+  .darkmode .light-surface .text-ink{color:var(--paper) !important;}
+  .darkmode .light-surface p{color:#C7CEDA !important;}
+  .darkmode .paper-bg{background:#070D17 !important;}
+
+  input:focus, textarea:focus, button:focus, a:focus{
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+  }
+
+  .back-to-top{
+    transition: opacity .3s ease, transform .3s ease;
+  }
+
+  .ticker-pause:hover .marquee-track{animation-play-state:paused;}
+</style>
+</head>
+
+<body class="paper-bg antialiased">
+
+<!-- Loader -->
+<div class="loader" id="loader">
+  <div class="text-center">
+    <div class="loader-mark">Napieo</div>
+    <div class="loader-bar"></div>
+  </div>
+</div>
+
+<!-- ============ NAVBAR ============ -->
+<header id="navbar" class="fixed top-0 inset-x-0 z-50 transition-all duration-300" style="background:rgba(10,22,40,0.97); backdrop-filter:blur(8px);">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <div class="flex items-center justify-between h-[72px]">
+      <a href="#home" class="flex items-center gap-2">
+        <span class="font-display text-2xl text-[var(--paper)] tracking-wide">Napieo</span>
+        <span class="font-display text-2xl text-[var(--gold)] italic">Digital Hub</span>
+      </a>
+
+      <nav class="hidden lg:flex items-center gap-8 text-sm text-[#D9DEE8] font-medium">
+        <a href="#home" class="nav-link hover:text-white">Home</a>
+        <a href="#about" class="nav-link hover:text-white">About</a>
+        <a href="#services" class="nav-link hover:text-white">Services</a>
+        <a href="#blog" class="nav-link hover:text-white">Blog</a>
+        <a href="#ebooks" class="nav-link hover:text-white">eBooks</a>
+        <a href="#resources" class="nav-link hover:text-white">Resources</a>
+        <a href="#testimonials" class="nav-link hover:text-white">Testimonials</a>
+        <a href="#contact" class="nav-link hover:text-white">Contact</a>
+      </nav>
+
+      <div class="hidden lg:flex items-center gap-3">
+        <button id="searchToggle" aria-label="Search" class="text-[#D9DEE8] hover:text-[var(--gold)] transition-colors p-2">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        </button>
+        <button id="darkToggle" aria-label="Toggle dark mode" class="text-[#D9DEE8] hover:text-[var(--gold)] transition-colors p-2">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+        </button>
+        <a href="#newsletter" class="btn-gold px-5 py-2.5 rounded-full text-sm font-semibold">Get Started</a>
+      </div>
+
+      <button id="mobileBtn" class="lg:hidden text-[var(--paper)] p-2" aria-label="Open menu">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Search bar dropdown -->
+  <div id="searchBar" class="hidden border-t border-white/10 bg-[var(--navy-panel)]">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8 py-4">
+      <input type="text" placeholder="Search articles, eBooks, resources…" class="w-full bg-transparent border-b border-white/20 text-white placeholder-white/40 py-2 focus:outline-none focus:border-[var(--gold)]" />
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobileMenu" class="hidden lg:hidden bg-[var(--navy)] border-t border-white/10">
+    <nav class="flex flex-col px-5 py-4 gap-4 text-[#D9DEE8] text-sm font-medium">
+      <a href="#home" class="mobile-link">Home</a>
+      <a href="#about" class="mobile-link">About</a>
+      <a href="#services" class="mobile-link">Services</a>
+      <a href="#blog" class="mobile-link">Blog</a>
+      <a href="#ebooks" class="mobile-link">eBooks</a>
+      <a href="#resources" class="mobile-link">Resources</a>
+      <a href="#testimonials" class="mobile-link">Testimonials</a>
+      <a href="#contact" class="mobile-link">Contact</a>
+      <a href="#newsletter" class="btn-gold px-5 py-2.5 rounded-full text-sm font-semibold text-center mt-2">Get Started</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section id="home" class="relative pt-[72px] overflow-hidden" style="background:radial-gradient(ellipse 80% 60% at 70% 0%, #14315A 0%, var(--navy) 55%);">
+  <div class="absolute inset-0 opacity-[0.07]" style="background-image:radial-gradient(circle, #fff 1px, transparent 1px); background-size:26px 26px;"></div>
+
+  <div class="max-w-7xl mx-auto px-5 lg:px-8 relative">
+    <div class="grid lg:grid-cols-2 gap-16 items-center py-20 lg:py-28">
+
+      <div class="reveal">
+        <div class="inline-flex items-center gap-2 text-[var(--gold)] text-xs tracking-[0.2em] font-semibold mb-6 chapter-label">
+          <span class="w-8 h-px bg-[var(--gold)]"></span> THE DIGITAL BUSINESS PLAYBOOK
+        </div>
+        <h1 class="font-display text-[2.6rem] sm:text-5xl lg:text-[3.4rem] leading-[1.08] text-white font-semibold">
+          Transform Your Digital Skills Into <span class="italic text-[var(--gold)]">Online Income</span>
+        </h1>
+        <p class="mt-6 text-lg text-[#C7CEDA] leading-relaxed max-w-xl">
+          Learn digital marketing, Amazon KDP publishing, affiliate marketing, blogging, content creation, and online business strategies with Napieo Digital Hub.
+        </p>
+        <div class="mt-9 flex flex-wrap gap-4">
+          <a href="#newsletter" class="btn-gold px-7 py-3.5 rounded-full font-semibold text-sm">Get Started</a>
+          <a href="#resources" class="btn-outline px-7 py-3.5 rounded-full font-semibold text-sm">Explore Resources</a>
+        </div>
+
+        <div class="mt-12 flex items-center gap-8 text-white/70 text-sm">
+          <div><span class="font-display text-2xl text-white block">12,400+</span>Creators taught</div>
+          <div class="w-px h-10 bg-white/15"></div>
+          <div><span class="font-display text-2xl text-white block">380+</span>Guides &amp; resources</div>
+          <div class="w-px h-10 bg-white/15"></div>
+          <div><span class="font-display text-2xl text-white block">4.9/5</span>Avg. rating</div>
+        </div>
+      </div>
+
+      <div class="reveal relative h-[420px] hidden md:block" style="transition-delay:.15s">
+        <!-- Tilted book-cover stack signature element -->
+        <div class="absolute inset-0 flex items-center justify-center">
+          <div class="relative w-[260px] h-[340px]">
+            <div class="spine absolute inset-0 rounded-md shadow-2xl" style="background:linear-gradient(155deg,#1B3A63,#0A1628); transform:rotate(-9deg) translate(-46px,18px); border:1px solid rgba(201,166,70,.3);">
+              <div class="p-6 h-full flex flex-col justify-between">
+                <span class="chapter-label text-[10px] text-[var(--gold)]">VOL. 01</span>
+                <div>
+                  <p class="font-display text-white text-lg leading-snug">KDP Publishing Blueprint</p>
+                  <p class="text-white/50 text-xs mt-2">Napieo Press</p>
+                </div>
+              </div>
+            </div>
+            <div class="spine absolute inset-0 rounded-md shadow-2xl" style="background:linear-gradient(155deg,#0F2847,#06101F); transform:rotate(6deg) translate(40px,6px); border:1px solid rgba(201,166,70,.3);">
+              <div class="p-6 h-full flex flex-col justify-between">
+                <span class="chapter-label text-[10px] text-[var(--gold)]">VOL. 02</span>
+                <div>
+                  <p class="font-display text-white text-lg leading-snug">The Affiliate Income Map</p>
+                  <p class="text-white/50 text-xs mt-2">Napieo Press</p>
+                </div>
+              </div>
+            </div>
+            <div class="spine absolute inset-0 rounded-md shadow-2xl z-10" style="background:linear-gradient(155deg,var(--gold-bright),var(--gold)); transform:rotate(-2deg) translate(-4px,-14px);">
+              <div class="p-6 h-full flex flex-col justify-between">
+                <span class="chapter-label text-[10px] text-[var(--navy)]">VOL. 03</span>
+                <div>
+                  <p class="font-display text-[var(--navy)] text-xl leading-snug font-semibold">Blogging &amp; SEO Mastery</p>
+                  <p class="text-[var(--navy)]/60 text-xs mt-2">Napieo Press</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Logo / trust marquee -->
+  <div class="border-t border-white/10 bg-[#081224] py-5 ticker-pause overflow-hidden">
+    <div class="marquee-track gap-16 text-white/40 text-sm font-medium tracking-wide">
+      <span>FEATURED STRATEGIES</span><span>•</span><span>AMAZON KDP</span><span>•</span><span>AFFILIATE MARKETING</span><span>•</span><span>BLOGGING & SEO</span><span>•</span><span>EMAIL MARKETING</span><span>•</span><span>CONTENT CREATION</span><span>•</span>
+      <span>FEATURED STRATEGIES</span><span>•</span><span>AMAZON KDP</span><span>•</span><span>AFFILIATE MARKETING</span><span>•</span><span>BLOGGING & SEO</span><span>•</span><span>EMAIL MARKETING</span><span>•</span><span>CONTENT CREATION</span><span>•</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section id="about" class="py-24 lg:py-32 paper-bg">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <div class="grid lg:grid-cols-12 gap-12 items-start">
+      <div class="lg:col-span-4 reveal">
+        <p class="chapter-label text-xs text-[var(--gold)] mb-3">ABOUT NAPIEO</p>
+        <h2 class="font-display text-3xl sm:text-4xl font-semibold leading-tight">A publishing house for the modern digital entrepreneur</h2>
+      </div>
+      <div class="lg:col-span-8 reveal" style="transition-delay:.1s">
+        <p class="text-lg leading-relaxed text-[#3A3A3A]">
+          Napieo Digital Hub is a digital business platform built for entrepreneurs, creators, writers, and complete beginners who want to turn practical online skills into sustainable income. We bring together Amazon KDP publishing, content creation, affiliate marketing, blogging, and online business strategy under one roof — taught the way a working publisher would teach it, not the way a course funnel would sell it.
+        </p>
+        <p class="mt-5 text-lg leading-relaxed text-[#3A3A3A]">
+          Every guide, template, and resource we publish is built from strategies we've tested ourselves. Our mission is simple: give people the proven systems, real templates, and step-by-step playbooks they need to build a profitable online business — without the noise, hype, or guesswork.
+        </p>
+
+        <div class="grid sm:grid-cols-3 gap-6 mt-10">
+          <div class="border-l-2 border-[var(--gold)] pl-5">
+            <p class="font-display text-2xl">Practical</p>
+            <p class="text-sm text-[#666] mt-1">Step-by-step systems you can apply the same day, not theory.</p>
+          </div>
+          <div class="border-l-2 border-[var(--gold)] pl-5">
+            <p class="font-display text-2xl">Tested</p>
+            <p class="text-sm text-[#666] mt-1">Every strategy is one we've run ourselves before we teach it.</p>
+          </div>
+          <div class="border-l-2 border-[var(--gold)] pl-5">
+            <p class="font-display text-2xl">Beginner-first</p>
+            <p class="text-sm text-[#666] mt-1">No prior experience required to start building.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section id="services" class="py-24 lg:py-32" style="background:var(--navy);">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <div class="flex flex-col items-center text-center mb-16 reveal">
+      <p class="chapter-label text-xs text-[var(--gold)] mb-3">WHAT WE TEACH</p>
+      <h2 class="font-display text-3xl sm:text-4xl font-semibold text-white">Eight paths to a digital income</h2>
+      <p class="text-[#9FA9BC] mt-4 max-w-xl">Pick a path, or combine a few — each is taught as its own complete system.</p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <!-- service card template x8 -->
+      <div class="reveal light-surface bg-white/[0.04] border border-white/10 rounded-xl p-7 card-lift" style="transition-delay:.02s">
+        <span class="chapter-label text-[var(--gold)] text-sm">01</span>
+        <h3 class="font-display text-xl text-white mt-4 mb-2">Amazon KDP Publishing</h3>
+        <p class="text-sm text-[#9FA9BC] leading-relaxed">Write, design, and publish low and no-content books that sell on Amazon — from niche research to launch.</p>
+      </div>
+      <div class="reveal light-surface bg-white/[0.04] border border-white/10 rounded-xl p-7 card-lift" style="transition-delay:.06s">
+        <span class="chapter-label text-[var(--gold)] text-sm">02</span>
+        <h3 class="font-display text-xl text-white mt-4 mb-2">Digital Marketing Training</h3>
+        <p class="text-sm text-[#9FA9BC] leading-relaxed">Core paid and organic marketing skills: funnels, ad fundamentals, positioning, and audience growth.</p>
+      </div>
+      <div class="reveal light-surface bg-white/[0.04] border border-white/10 rounded-xl p-7 card-lift" style="transition-delay:.1s">
+        <span class="chapter-label text-[var(--gold)] text-sm">03</span>
+        <h3 class="font-display text-xl text-white mt-4 mb-2">Affiliate Marketing Strategies</h3>
+        <p class="text-sm text-[#9FA9BC] leading-relaxed">Choose offers, build trust-based content, and structure recurring affiliate income streams.</p>
+      </div>
+      <div class="reveal light-surface bg-white/[0.04] border border-white/10 rounded-xl p-7 card-lift" style="transition-delay:.14s">
+        <span class="chapter-label text-[var(--gold)] text-sm">04</span>
+        <h3 class="font-display text-xl text-white mt-4 mb-2">Content Creation</h3>
+        <p class="text-sm text-[#9FA9BC] leading-relaxed">Repeatable systems for video, writing, and visual content that compound over time.</p>
+      </div>
+      <div class="reveal light-surface bg-white/[0.04] border border-white/10 rounded-xl p-7 card-lift" style="transition-delay:.02s">
+        <span class="chapter-label text-[var(--gold)] text-sm">05</span>
+        <h3 class="font-display text-xl text-white mt-4 mb-2">Blogging &amp; SEO</h3>
+        <p class="text-sm text-[#9FA9BC] leading-relaxed">Keyword research, on-page SEO, and content structure that ranks and stays ranked.</p>
+      </div>
+      <div class="reveal light-surface bg-white/[0.04] border border-white/10 rounded-xl p-7 card-lift" style="transition-delay:.06s">
+        <span class="chapter-label text-[var(--gold)] text-sm">06</span>
+        <h3 class="font-display text-xl text-white mt-4 mb-2">eBook Creation &amp; Publishing</h3>
+        <p class="text-sm text-[#9FA9BC] leading-relaxed">Plan, write, design, and distribute eBooks across Amazon and your own platform.</p>
+      </div>
+      <div class="reveal light-surface bg-white/[0.04] border border-white/10 rounded-xl p-7 card-lift" style="transition-delay:.1s">
+        <span class="chapter-label text-[var(--gold)] text-sm">07</span>
+        <h3 class="font-display text-xl text-white mt-4 mb-2">Online Business Consulting</h3>
+        <p class="text-sm text-[#9FA9BC] leading-relaxed">1:1 strategy sessions to diagnose what's holding your digital business back.</p>
+      </div>
+      <div class="reveal light-surface bg-white/[0.04] border border-white/10 rounded-xl p-7 card-lift" style="transition-delay:.14s">
+        <span class="chapter-label text-[var(--gold)] text-sm">08</span>
+        <h3 class="font-display text-xl text-white mt-4 mb-2">Email Marketing</h3>
+        <p class="text-sm text-[#9FA9BC] leading-relaxed">Build and nurture a list with sequences that convert subscribers into customers.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURED EBOOKS (Shelf) ============ -->
+<section id="ebooks" class="py-24 lg:py-32 paper-bg">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <div class="flex flex-wrap items-end justify-between gap-6 mb-14 reveal">
+      <div>
+        <p class="chapter-label text-xs text-[var(--gold)] mb-3">FROM NAPIEO PRESS</p>
+        <h2 class="font-display text-3xl sm:text-4xl font-semibold">Featured eBooks</h2>
+      </div>
+      <a href="#" class="text-sm font-semibold border-b border-[var(--ink)] hover:border-[var(--gold)] hover:text-[var(--gold)] transition-colors pb-0.5">Browse all eBooks →</a>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-7">
+
+      <article class="reveal group" style="transition-delay:.02s">
+        <div class="shelf-base rounded-t-md aspect-[3/4] flex items-center justify-center relative overflow-hidden spine">
+          <div class="absolute inset-0 opacity-20" style="background-image:repeating-linear-gradient(45deg,#fff 0 1px,transparent 1px 14px);"></div>
+          <div class="text-center px-6 z-10">
+            <p class="chapter-label text-[var(--gold)] text-[10px] mb-3">NAPIEO PRESS</p>
+            <p class="font-display text-white text-xl leading-snug">The KDP Blueprint</p>
+            <p class="text-white/40 text-xs mt-3">No-Content Publishing</p>
+          </div>
+        </div>
+        <div class="border border-t-0 border-[#E7E1D3] rounded-b-md p-5">
+          <p class="text-sm text-[#666] leading-relaxed">A start-to-finish system for launching low-content books on Amazon, from niche validation to your first royalty.</p>
+          <div class="flex items-center justify-between mt-4">
+            <span class="font-display text-lg">$19</span>
+            <a href="#" class="text-xs font-semibold px-4 py-2 rounded-full border border-[var(--ink)] hover:bg-[var(--navy)] hover:text-white hover:border-[var(--navy)] transition-colors">Buy Now</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="reveal group" style="transition-delay:.06s">
+        <div class="shelf-base rounded-t-md aspect-[3/4] flex items-center justify-center relative overflow-hidden spine">
+          <div class="absolute inset-0 opacity-20" style="background-image:repeating-linear-gradient(45deg,#fff 0 1px,transparent 1px 14px);"></div>
+          <div class="text-center px-6 z-10">
+            <p class="chapter-label text-[var(--gold)] text-[10px] mb-3">NAPIEO PRESS</p>
+            <p class="font-display text-white text-xl leading-snug">The Affiliate Income Map</p>
+            <p class="text-white/40 text-xs mt-3">Affiliate Marketing</p>
+          </div>
+        </div>
+        <div class="border border-t-0 border-[#E7E1D3] rounded-b-md p-5">
+          <p class="text-sm text-[#666] leading-relaxed">Choose the right offers and build content that earns trust first and commissions second.</p>
+          <div class="flex items-center justify-between mt-4">
+            <span class="font-display text-lg">$15</span>
+            <a href="#" class="text-xs font-semibold px-4 py-2 rounded-full border border-[var(--ink)] hover:bg-[var(--navy)] hover:text-white hover:border-[var(--navy)] transition-colors">Buy Now</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="reveal group" style="transition-delay:.1s">
+        <div class="shelf-base rounded-t-md aspect-[3/4] flex items-center justify-center relative overflow-hidden spine">
+          <div class="absolute inset-0 opacity-20" style="background-image:repeating-linear-gradient(45deg,#fff 0 1px,transparent 1px 14px);"></div>
+          <div class="text-center px-6 z-10">
+            <p class="chapter-label text-[var(--gold)] text-[10px] mb-3">NAPIEO PRESS</p>
+            <p class="font-display text-white text-xl leading-snug">Blogging &amp; SEO Mastery</p>
+            <p class="text-white/40 text-xs mt-3">Content &amp; SEO</p>
+          </div>
+        </div>
+        <div class="border border-t-0 border-[#E7E1D3] rounded-b-md p-5">
+          <p class="text-sm text-[#666] leading-relaxed">Keyword strategy, content structure, and on-page SEO that gets posts ranking and staying ranked.</p>
+          <div class="flex items-center justify-between mt-4">
+            <span class="font-display text-lg">$17</span>
+            <a href="#" class="text-xs font-semibold px-4 py-2 rounded-full border border-[var(--ink)] hover:bg-[var(--navy)] hover:text-white hover:border-[var(--navy)] transition-colors">Buy Now</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="reveal group" style="transition-delay:.14s">
+        <div class="shelf-base rounded-t-md aspect-[3/4] flex items-center justify-center relative overflow-hidden spine">
+          <div class="absolute inset-0 opacity-20" style="background-image:repeating-linear-gradient(45deg,#fff 0 1px,transparent 1px 14px);"></div>
+          <div class="text-center px-6 z-10">
+            <p class="chapter-label text-[var(--gold)] text-[10px] mb-3">NAPIEO PRESS</p>
+            <p class="font-display text-white text-xl leading-snug">Email List, Real Income</p>
+            <p class="text-white/40 text-xs mt-3">Email Marketing</p>
+          </div>
+        </div>
+        <div class="border border-t-0 border-[#E7E1D3] rounded-b-md p-5">
+          <p class="text-sm text-[#666] leading-relaxed">Build a list from zero and write sequences that turn new subscribers into paying customers.</p>
+          <div class="flex items-center justify-between mt-4">
+            <span class="font-display text-lg">$15</span>
+            <a href="#" class="text-xs font-semibold px-4 py-2 rounded-full border border-[var(--ink)] hover:bg-[var(--navy)] hover:text-white hover:border-[var(--navy)] transition-colors">Buy Now</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ BLOG ============ -->
+<section id="blog" class="py-24 lg:py-32" style="background:#F3EFE4;">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <div class="flex flex-wrap items-end justify-between gap-6 mb-12 reveal">
+      <div>
+        <p class="chapter-label text-xs text-[var(--gold)] mb-3">THE JOURNAL</p>
+        <h2 class="font-display text-3xl sm:text-4xl font-semibold">Latest from the blog</h2>
+      </div>
+      <div class="flex items-center gap-2 bg-white border border-[#E2DBC8] rounded-full px-4 py-2 w-full sm:w-72">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="text" placeholder="Search articles…" class="bg-transparent text-sm w-full focus:outline-none">
+      </div>
+    </div>
+
+    <!-- categories -->
+    <div class="flex flex-wrap gap-2 mb-10 reveal">
+      <button class="cat-btn active px-4 py-1.5 rounded-full text-xs font-semibold">All</button>
+      <button class="cat-btn px-4 py-1.5 rounded-full text-xs font-semibold">Amazon KDP</button>
+      <button class="cat-btn px-4 py-1.5 rounded-full text-xs font-semibold">Affiliate Marketing</button>
+      <button class="cat-btn px-4 py-1.5 rounded-full text-xs font-semibold">SEO</button>
+      <button class="cat-btn px-4 py-1.5 rounded-full text-xs font-semibold">Email Marketing</button>
+    </div>
+
+    <div class="grid lg:grid-cols-3 gap-8">
+      <!-- featured post -->
+      <article class="reveal lg:col-span-2 light-surface bg-white rounded-xl overflow-hidden border border-[#E2DBC8] card-lift">
+        <div class="aspect-[16/8] flex items-center justify-center" style="background:linear-gradient(135deg,#0F2847,#0A1628);">
+          <span class="chapter-label text-[var(--gold)] text-xs">FEATURED STORY</span>
+        </div>
+        <div class="p-7">
+          <p class="chapter-label text-[10px] text-[var(--gold)] mb-2">AMAZON KDP · 9 MIN READ</p>
+          <h3 class="font-display text-2xl font-semibold leading-snug">How I Validated a Profitable KDP Niche in One Weekend</h3>
+          <p class="text-[#666] mt-3 leading-relaxed">A practical walkthrough of the exact research process for finding low-competition, high-demand KDP niches before you design a single page.</p>
+          <a href="#" class="inline-block mt-4 text-sm font-semibold border-b border-[var(--ink)] hover:border-[var(--gold)] hover:text-[var(--gold)] transition-colors">Read article →</a>
+        </div>
+      </article>
+
+      <div class="flex flex-col gap-6">
+        <article class="reveal light-surface bg-white rounded-xl border border-[#E2DBC8] p-6 card-lift" style="transition-delay:.05s">
+          <p class="chapter-label text-[10px] text-[var(--gold)] mb-2">AFFILIATE MARKETING · 6 MIN</p>
+          <h3 class="font-display text-lg font-semibold leading-snug">5 Affiliate Offers Beginners Should Avoid</h3>
+          <a href="#" class="text-xs font-semibold mt-3 inline-block border-b border-[var(--ink)] hover:border-[var(--gold)] hover:text-[var(--gold)] transition-colors">Read more →</a>
+        </article>
+        <article class="reveal light-surface bg-white rounded-xl border border-[#E2DBC8] p-6 card-lift" style="transition-delay:.1s">
+          <p class="chapter-label text-[10px] text-[var(--gold)] mb-2">SEO · 7 MIN</p>
+          <h3 class="font-display text-lg font-semibold leading-snug">On-Page SEO Checklist for New Blogs</h3>
+          <a href="#" class="text-xs font-semibold mt-3 inline-block border-b border-[var(--ink)] hover:border-[var(--gold)] hover:text-[var(--gold)] transition-colors">Read more →</a>
+        </article>
+        <article class="reveal light-surface bg-white rounded-xl border border-[#E2DBC8] p-6 card-lift" style="transition-delay:.15s">
+          <p class="chapter-label text-[10px] text-[var(--gold)] mb-2">EMAIL MARKETING · 5 MIN</p>
+          <h3 class="font-display text-lg font-semibold leading-snug">The 3-Email Welcome Sequence That Converts</h3>
+          <a href="#" class="text-xs font-semibold mt-3 inline-block border-b border-[var(--ink)] hover:border-[var(--gold)] hover:text-[var(--gold)] transition-colors">Read more →</a>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RESOURCES ============ -->
+<section id="resources" class="py-24 lg:py-32" style="background:var(--navy);">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <div class="text-center mb-16 reveal">
+      <p class="chapter-label text-xs text-[var(--gold)] mb-3">FREE DOWNLOADS</p>
+      <h2 class="font-display text-3xl sm:text-4xl font-semibold text-white">Resources to build with today</h2>
+      <p class="text-[#9FA9BC] mt-4 max-w-xl mx-auto">No email-gated upsells — just the templates and checklists we use ourselves.</p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-5">
+      <a href="#" class="reveal light-surface bg-white/[0.04] border border-white/10 hover:border-[var(--gold)] rounded-xl p-6 card-lift flex flex-col" style="transition-delay:.02s">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C9A646" stroke-width="1.6"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
+        <h3 class="font-display text-base text-white mt-4">Business Plan Template</h3>
+        <p class="text-xs text-[#9FA9BC] mt-2 flex-1">A one-page plan to map your digital business model.</p>
+        <span class="text-xs font-semibold text-[var(--gold)] mt-4">Download PDF →</span>
+      </a>
+      <a href="#" class="reveal light-surface bg-white/[0.04] border border-white/10 hover:border-[var(--gold)] rounded-xl p-6 card-lift flex flex-col" style="transition-delay:.06s">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C9A646" stroke-width="1.6"><path d="M3 3h18v18H3z"/><path d="M3 9h18M9 21V9"/></svg>
+        <h3 class="font-display text-base text-white mt-4">Marketing Strategy Guide</h3>
+        <p class="text-xs text-[#9FA9BC] mt-2 flex-1">Step-by-step framework for your first 90 days.</p>
+        <span class="text-xs font-semibold text-[var(--gold)] mt-4">Download PDF →</span>
+      </a>
+      <a href="#" class="reveal light-surface bg-white/[0.04] border border-white/10 hover:border-[var(--gold)] rounded-xl p-6 card-lift flex flex-col" style="transition-delay:.1s">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C9A646" stroke-width="1.6"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        <h3 class="font-display text-base text-white mt-4">Content Calendar</h3>
+        <p class="text-xs text-[#9FA9BC] mt-2 flex-1">A 30-day editable content calendar template.</p>
+        <span class="text-xs font-semibold text-[var(--gold)] mt-4">Download Sheet →</span>
+      </a>
+      <a href="#" class="reveal light-surface bg-white/[0.04] border border-white/10 hover:border-[var(--gold)] rounded-xl p-6 card-lift flex flex-col" style="transition-delay:.14s">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C9A646" stroke-width="1.6"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+        <h3 class="font-display text-base text-white mt-4">KDP Publishing Checklist</h3>
+        <p class="text-xs text-[#9FA9BC] mt-2 flex-1">Every step from manuscript to live listing.</p>
+        <span class="text-xs font-semibold text-[var(--gold)] mt-4">Download PDF →</span>
+      </a>
+      <a href="#" class="reveal light-surface bg-white/[0.04] border border-white/10 hover:border-[var(--gold)] rounded-xl p-6 card-lift flex flex-col" style="transition-delay:.18s">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C9A646" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        <h3 class="font-display text-base text-white mt-4">Affiliate Toolkit</h3>
+        <p class="text-xs text-[#9FA9BC] mt-2 flex-1">Tracked link templates and a disclosure pack.</p>
+        <span class="text-xs font-semibold text-[var(--gold)] mt-4">Download ZIP →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section id="testimonials" class="py-24 lg:py-32 paper-bg">
+  <div class="max-w-4xl mx-auto px-5 lg:px-8 text-center">
+    <p class="chapter-label text-xs text-[var(--gold)] mb-3 reveal">WHAT READERS SAY</p>
+    <h2 class="font-display text-3xl sm:text-4xl font-semibold reveal">Built by, and for, real creators</h2>
+
+    <div class="mt-14 relative min-h-[230px]">
+      <div class="testi-slide active">
+        <div class="flex justify-center gap-1 mb-5 text-[var(--gold)]">★★★★★</div>
+        <p class="font-display text-xl sm:text-2xl leading-relaxed text-[#2A2A2A]">"The KDP Blueprint paid for itself in the first week. I went from zero books published to three live listings in eleven days, following the checklist exactly."</p>
+        <p class="mt-6 text-sm font-semibold">Amara Chen</p>
+        <p class="text-xs text-[#888]">KDP Publisher, Toronto</p>
+      </div>
+      <div class="testi-slide">
+        <div class="flex justify-center gap-1 mb-5 text-[var(--gold)]">★★★★★</div>
+        <p class="font-display text-xl sm:text-2xl leading-relaxed text-[#2A2A2A]">"Napieo's affiliate framework is the first one that actually explained how to pick offers I'd be comfortable recommending. My click-through rate doubled."</p>
+        <p class="mt-6 text-sm font-semibold">Daniel Okafor</p>
+        <p class="text-xs text-[#888]">Niche Site Owner, Lagos</p>
+      </div>
+      <div class="testi-slide">
+        <div class="flex justify-center gap-1 mb-5 text-[var(--gold)]">★★★★★</div>
+        <p class="font-display text-xl sm:text-2xl leading-relaxed text-[#2A2A2A]">"I'd written a blog for two years with no traffic. The SEO eBook alone got my best post ranking on page one within six weeks."</p>
+        <p class="mt-6 text-sm font-semibold">Priya Raman</p>
+        <p class="text-xs text-[#888]">Blogger, Austin</p>
+      </div>
+    </div>
+
+    <div class="flex justify-center gap-2 mt-10">
+      <button class="testi-dot w-2.5 h-2.5 rounded-full bg-[var(--navy)] opacity-100" data-i="0"></button>
+      <button class="testi-dot w-2.5 h-2.5 rounded-full bg-[var(--navy)] opacity-30" data-i="1"></button>
+      <button class="testi-dot w-2.5 h-2.5 rounded-full bg-[var(--navy)] opacity-30" data-i="2"></button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA BANNER ============ -->
+<section class="py-16" style="background:linear-gradient(90deg,var(--gold) 0%, var(--gold-bright) 100%);">
+  <div class="max-w-5xl mx-auto px-5 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+    <h3 class="font-display text-2xl sm:text-3xl font-semibold text-[var(--navy)]">Ready to publish your first eBook?</h3>
+    <a href="#ebooks" class="bg-[var(--navy)] text-white px-7 py-3.5 rounded-full font-semibold text-sm hover:bg-[#06101F] transition-colors whitespace-nowrap">Browse eBooks</a>
+  </div>
+</section>
+
+<!-- ============ NEWSLETTER ============ -->
+<section id="newsletter" class="py-24" style="background:var(--navy);">
+  <div class="max-w-2xl mx-auto px-5 lg:px-8 text-center">
+    <p class="chapter-label text-xs text-[var(--gold)] mb-3 reveal">STAY IN THE LOOP</p>
+    <h2 class="font-display text-3xl sm:text-4xl font-semibold text-white reveal">Join the Napieo Digital Hub Community</h2>
+    <p class="text-[#9FA9BC] mt-4 reveal">Get exclusive tips, free resources, and digital business strategies delivered directly to your inbox.</p>
+
+    <form id="newsletterForm" class="mt-8 flex flex-col sm:flex-row gap-3 reveal" novalidate>
+      <input id="newsletterEmail" type="email" required placeholder="you@example.com"
+        class="flex-1 bg-white/[0.06] border border-white/20 rounded-full px-5 py-3.5 text-white placeholder-white/40 focus:outline-none focus:border-[var(--gold)]" />
+      <button type="submit" class="btn-gold px-7 py-3.5 rounded-full font-semibold text-sm whitespace-nowrap">Subscribe</button>
+    </form>
+    <p id="newsletterMsg" class="text-xs mt-3 h-4"></p>
+    <p class="text-xs text-white/30 mt-2">No spam. Unsubscribe anytime.</p>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact" class="py-24 lg:py-32 paper-bg">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <div class="text-center mb-14 reveal">
+      <p class="chapter-label text-xs text-[var(--gold)] mb-3">GET IN TOUCH</p>
+      <h2 class="font-display text-3xl sm:text-4xl font-semibold">Let's talk about your digital business</h2>
+    </div>
+
+    <div class="grid lg:grid-cols-5 gap-12">
+      <form id="contactForm" class="lg:col-span-3 reveal space-y-5" novalidate>
+        <div class="grid sm:grid-cols-2 gap-5">
+          <div>
+            <label class="text-xs font-semibold text-[#555] block mb-1.5">Full name</label>
+            <input id="cName" type="text" required class="w-full border border-[#DDD6C4] rounded-lg px-4 py-3 focus:outline-none focus:border-[var(--gold)]" />
+            <p class="err-msg text-xs text-red-600 mt-1 hidden">Please enter your name.</p>
+          </div>
+          <div>
+            <label class="text-xs font-semibold text-[#555] block mb-1.5">Email address</label>
+            <input id="cEmail" type="email" required class="w-full border border-[#DDD6C4] rounded-lg px-4 py-3 focus:outline-none focus:border-[var(--gold)]" />
+            <p class="err-msg text-xs text-red-600 mt-1 hidden">Please enter a valid email.</p>
+          </div>
+        </div>
+        <div>
+          <label class="text-xs font-semibold text-[#555] block mb-1.5">Subject</label>
+          <input id="cSubject" type="text" required class="w-full border border-[#DDD6C4] rounded-lg px-4 py-3 focus:outline-none focus:border-[var(--gold)]" />
+          <p class="err-msg text-xs text-red-600 mt-1 hidden">Please enter a subject.</p>
+        </div>
+        <div>
+          <label class="text-xs font-semibold text-[#555] block mb-1.5">Message</label>
+          <textarea id="cMessage" required rows="5" class="w-full border border-[#DDD6C4] rounded-lg px-4 py-3 focus:outline-none focus:border-[var(--gold)]"></textarea>
+          <p class="err-msg text-xs text-red-600 mt-1 hidden">Please enter a message.</p>
+        </div>
+        <button type="submit" class="bg-[var(--navy)] text-white px-7 py-3.5 rounded-full font-semibold text-sm hover:bg-[#06101F] transition-colors">Send Message</button>
+        <p id="contactMsg" class="text-sm h-5"></p>
+      </form>
+
+      <div class="lg:col-span-2 reveal" style="transition-delay:.1s">
+        <div class="bg-[var(--navy)] rounded-xl p-8 text-white">
+          <h3 class="font-display text-xl mb-6">Contact details</h3>
+          <ul class="space-y-4 text-sm text-[#C7CEDA]">
+            <li class="flex gap-3"><span class="text-[var(--gold)]">✉</span> hello@napieodigitalhub.com</li>
+            <li class="flex gap-3"><span class="text-[var(--gold)]">☎</span> +1 (555) 213-0042</li>
+            <li class="flex gap-3"><span class="text-[var(--gold)]">⌖</span> Remote-first · Serving creators worldwide</li>
+          </ul>
+          <a href="https://wa.me/15552130042" target="_blank" rel="noopener" class="mt-7 flex items-center justify-center gap-2 bg-[#25D366] text-white rounded-full py-3 text-sm font-semibold hover:opacity-90 transition-opacity">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.77.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 004.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0012.04 2zm0 18.13a8.2 8.2 0 01-4.18-1.14l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 01-1.26-4.37c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 012.41 5.83c0 4.55-3.7 8.21-8.26 8.21z"/></svg>
+            Chat on WhatsApp
+          </a>
+          <div class="flex gap-3 mt-7 pt-7 border-t border-white/10">
+            <a href="#" aria-label="Instagram" class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center hover:border-[var(--gold)] hover:text-[var(--gold)] transition-colors">IG</a>
+            <a href="#" aria-label="Facebook" class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center hover:border-[var(--gold)] hover:text-[var(--gold)] transition-colors">FB</a>
+            <a href="#" aria-label="X" class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center hover:border-[var(--gold)] hover:text-[var(--gold)] transition-colors">X</a>
+            <a href="#" aria-label="Pinterest" class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center hover:border-[var(--gold)] hover:text-[var(--gold)] transition-colors">P</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="pt-20 pb-8" style="background:#06101F;">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 pb-14 border-b border-white/10">
+      <div>
+        <span class="font-display text-2xl text-white">Napieo <span class="text-[var(--gold)] italic">Digital Hub</span></span>
+        <p class="text-sm text-[#8B93A3] mt-4 leading-relaxed">Practical, tested strategies for digital marketing, publishing, and online business — taught by creators, for creators.</p>
+      </div>
+      <div>
+        <h4 class="text-white text-sm font-semibold mb-4 tracking-wide">Quick Links</h4>
+        <ul class="space-y-2.5 text-sm text-[#8B93A3]">
+          <li><a href="#about" class="hover:text-[var(--gold)] transition-colors">About</a></li>
+          <li><a href="#services" class="hover:text-[var(--gold)] transition-colors">Services</a></li>
+          <li><a href="#blog" class="hover:text-[var(--gold)] transition-colors">Blog</a></li>
+          <li><a href="#ebooks" class="hover:text-[var(--gold)] transition-colors">eBooks</a></li>
+          <li><a href="#resources" class="hover:text-[var(--gold)] transition-colors">Resources</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-white text-sm font-semibold mb-4 tracking-wide">Legal</h4>
+        <ul class="space-y-2.5 text-sm text-[#8B93A3]">
+          <li><a href="#" class="hover:text-[var(--gold)] transition-colors">Privacy Policy</a></li>
+          <li><a href="#" class="hover:text-[var(--gold)] transition-colors">Terms &amp; Conditions</a></li>
+          <li><a href="#" class="hover:text-[var(--gold)] transition-colors">Disclaimer</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-white text-sm font-semibold mb-4 tracking-wide">Follow</h4>
+        <div class="flex gap-3">
+          <a href="#" aria-label="Instagram" class="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-xs text-[#8B93A3] hover:border-[var(--gold)] hover:text-[var(--gold)] transition-colors">IG</a>
+          <a href="#" aria-label="Facebook" class="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-xs text-[#8B93A3] hover:border-[var(--gold)] hover:text-[var(--gold)] transition-colors">FB</a>
+          <a href="#" aria-label="X" class="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-xs text-[#8B93A3] hover:border-[var(--gold)] hover:text-[var(--gold)] transition-colors">X</a>
+          <a href="#" aria-label="Pinterest" class="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-xs text-[#8B93A3] hover:border-[var(--gold)] hover:text-[var(--gold)] transition-colors">P</a>
+        </div>
+      </div>
+    </div>
+    <p class="text-center text-xs text-[#5C6470] pt-7">© 2026 Napieo Digital Hub. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- Back to top -->
+<button id="backToTop" aria-label="Back to top" class="back-to-top fixed bottom-6 right-6 z-40 w-11 h-11 rounded-full bg-[var(--navy)] text-[var(--gold)] flex items-center justify-center shadow-lg opacity-0 pointer-events-none">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<!-- Live chat widget (mock) -->
+<button id="chatWidget" aria-label="Open live chat" class="fixed bottom-6 left-6 z-40 w-14 h-14 rounded-full btn-gold flex items-center justify-center shadow-2xl">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+</button>
+<div id="chatPanel" class="hidden fixed bottom-24 left-6 z-40 w-80 bg-white rounded-xl shadow-2xl border border-[#E2DBC8] overflow-hidden">
+  <div class="bg-[var(--navy)] text-white px-5 py-4 flex items-center justify-between">
+    <div>
+      <p class="font-display text-sm">Napieo Support</p>
+      <p class="text-[10px] text-[var(--gold)]">Typically replies within minutes</p>
+    </div>
+    <button id="closeChatBtn" class="text-white/60 hover:text-white">✕</button>
+  </div>
+  <div class="p-5 text-sm text-[#555] bg-[#FAF8F3]">
+    <p class="bg-white border border-[#E2DBC8] rounded-lg p-3 inline-block">👋 Hi! Questions about our eBooks, resources, or services? Leave a message and we'll get back to you.</p>
+  </div>
+  <div class="p-3 border-t border-[#E2DBC8] flex gap-2">
+    <input type="text" placeholder="Type a message…" class="flex-1 text-sm border border-[#DDD6C4] rounded-full px-4 py-2 focus:outline-none focus:border-[var(--gold)]" />
+    <button class="btn-gold w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0">→</button>
+  </div>
+</div>
+
+<script>
+  // Loader
+  window.addEventListener('load', () => {
+    setTimeout(()=> document.getElementById('loader').classList.add('hide'), 350);
+  });
+
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  }, {threshold:.12});
+  revealEls.forEach(el=>io.observe(el));
+
+  // Navbar scroll shadow
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', ()=>{
+    navbar.style.boxShadow = window.scrollY > 20 ? '0 8px 24px -12px rgba(0,0,0,.4)' : 'none';
+    const btn = document.getElementById('backToTop');
+    if(window.scrollY > 600){ btn.style.opacity='1'; btn.style.pointerEvents='auto'; }
+    else { btn.style.opacity='0'; btn.style.pointerEvents='none'; }
+  });
+
+  // Mobile menu
+  const mobileBtn = document.getElementById('mobileBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  mobileBtn.addEventListener('click', ()=> mobileMenu.classList.toggle('hidden'));
+  document.querySelectorAll('.mobile-link').forEach(l=> l.addEventListener('click', ()=> mobileMenu.classList.add('hidden')));
+
+  // Search toggle
+  const searchToggle = document.getElementById('searchToggle');
+  const searchBar = document.getElementById('searchBar');
+  searchToggle.addEventListener('click', ()=> searchBar.classList.toggle('hidden'));
+
+  // Dark mode
+  const darkToggle = document.getElementById('darkToggle');
+  darkToggle.addEventListener('click', ()=> document.documentElement.classList.toggle('darkmode'));
+
+  // Back to top
+  document.getElementById('backToTop').addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
+
+  // Chat widget
+  const chatWidget = document.getElementById('chatWidget');
+  const chatPanel = document.getElementById('chatPanel');
+  chatWidget.addEventListener('click', ()=> chatPanel.classList.toggle('hidden'));
+  document.getElementById('closeChatBtn').addEventListener('click', ()=> chatPanel.classList.add('hidden'));
+
+  // Category buttons
+  document.querySelectorAll('.cat-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+
+  // Testimonial slider
+  const slides = document.querySelectorAll('.testi-slide');
+  const dots = document.querySelectorAll('.testi-dot');
+  let testiIndex = 0;
+  function showSlide(i){
+    slides.forEach(s=>s.classList.remove('active'));
+    dots.forEach(d=>d.classList.remove('opacity-100'));
+    dots.forEach(d=>d.classList.add('opacity-30'));
+    slides[i].classList.add('active');
+    dots[i].classList.remove('opacity-30');
+    dots[i].classList.add('opacity-100');
+    testiIndex = i;
+  }
+  dots.forEach(d=> d.addEventListener('click', ()=> showSlide(parseInt(d.dataset.i))));
+  setInterval(()=>{ showSlide((testiIndex+1) % slides.length); }, 6000);
+
+  // Newsletter form validation
+  document.getElementById('newsletterForm').addEventListener('submit', (e)=>{
+    e.preventDefault();
+    const email = document.getElementById('newsletterEmail');
+    const msg = document.getElementById('newsletterMsg');
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if(!re.test(email.value)){
+      msg.textContent = 'Please enter a valid email address.';
+      msg.className = 'text-xs mt-3 h-4 text-red-400';
+      return;
+    }
+    msg.textContent = 'You\'re subscribed! Check your inbox soon.';
+    msg.className = 'text-xs mt-3 h-4 text-[var(--gold)]';
+    email.value='';
+  });
+
+  // Contact form validation
+  document.getElementById('contactForm').addEventListener('submit', (e)=>{
+    e.preventDefault();
+    const fields = [
+      {el: document.getElementById('cName'), valid: v=>v.trim().length>1},
+      {el: document.getElementById('cEmail'), valid: v=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)},
+      {el: document.getElementById('cSubject'), valid: v=>v.trim().length>2},
+      {el: document.getElementById('cMessage'), valid: v=>v.trim().length>5},
+    ];
+    let allValid = true;
+    fields.forEach(f=>{
+      const errEl = f.el.parentElement.querySelector('.err-msg');
+      if(!f.valid(f.el.value)){
+        allValid = false;
+        f.el.classList.add('border-red-500');
+        if(errEl) errEl.classList.remove('hidden');
+      } else {
+        f.el.classList.remove('border-red-500');
+        if(errEl) errEl.classList.add('hidden');
+      }
+    });
+    const msg = document.getElementById('contactMsg');
+    if(allValid){
+      msg.textContent = 'Message sent — we\'ll reply within 1–2 business days.';
+      msg.className = 'text-sm h-5 text-green-700';
+      fields.forEach(f=> f.el.value='');
+    } else {
+      msg.textContent = 'Please fix the highlighted fields.';
+      msg.className = 'text-sm h-5 text-red-600';
+    }
+  });
+</script>
+
+<!-- Category button active styling (Tailwind can't do this purely via classes added at runtime without a stylesheet rule) -->
+<style>
+  .cat-btn{ background:#fff; border:1px solid #E2DBC8; color:#555; transition: all .25s ease; }
+  .cat-btn.active{ background:var(--navy); border-color:var(--navy); color:#fff; }
+  .cat-btn:hover{ border-color:var(--gold); }
+</style>
+
+</body>
+</html>
